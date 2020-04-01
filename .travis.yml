@@ -1,0 +1,12 @@
+language: csharp
+solution: MovieListApp.sln
+install:
+  - dotnet restore
+script:
+  - dotnet build
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./MovieListApp.Test/bin/Release/MovieListApp.Test.dll
+deploy:
+  provider: azure_web_apps
+  username: $AZURE_WA_USERNAME
+  password: $AZURE_WA_PASSWORD
+  site: "YourMovieList"
