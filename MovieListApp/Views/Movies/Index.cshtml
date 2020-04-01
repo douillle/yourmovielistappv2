@@ -1,0 +1,57 @@
+﻿@model IEnumerable<YourMovieListApp.Models.Movie>
+
+@{
+    ViewData["Title"] = "Tes films";
+}
+
+<h1>Tes films</h1>
+
+<p>
+    <a asp-action="Create">Ajoutez un film</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.ImageUrl != null)
+                    {
+                        <img src="@Url.Content(item.ImageUrl)" alt="Image" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
