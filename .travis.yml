@@ -1,10 +1,11 @@
 language: csharp
-solution: MovieListApp.sln
+mono: none
+dotnet: 3.0.1
 install:
-  - nuget restore MovieListApp.sln
+  - dotnet restore 
 script:
-  - msbuild /p:Configuration=Release MovieListApp.sln
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./MovieListApp.Test/bin/Release/MovieListApp.Test.dll
+  - dotnet build
+  - dotnet test MovieListApp.Test/MovieListApp.Test.csproj
 deploy:
   provider: azure_web_apps
   username: $AZURE_WA_USERNAME
