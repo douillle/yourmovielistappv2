@@ -1,9 +1,8 @@
 language: csharp
 mono: none
 dotnet: 3.0.1
-install:
-  - dotnet restore 
 script:
+  - dotnet restore 
   - dotnet build
   - dotnet test MovieListApp.Test/MovieListApp.Test.csproj
 deploy:
