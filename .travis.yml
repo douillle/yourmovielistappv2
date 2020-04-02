@@ -9,4 +9,4 @@ deploy:
   provider: azure_web_apps
   username: $AZURE_WA_USERNAME
   password: $AZURE_WA_PASSWORD
-  site: "YourMovieList"
+  site: "yourmovielistv2"
