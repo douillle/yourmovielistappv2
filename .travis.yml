@@ -1,9 +1,9 @@
 language: csharp
 solution: MovieListApp.sln
 install:
-  - dotnet restore
+  - nuget restore MovieListApp.sln
 script:
-  - dotnet build
+  - msbuild /p:Configuration=Release MovieListApp.sln
   - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./MovieListApp.Test/bin/Release/MovieListApp.Test.dll
 deploy:
   provider: azure_web_apps
