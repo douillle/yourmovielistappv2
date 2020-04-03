@@ -15,17 +15,13 @@ namespace MovieListApp.Services
         {
             MongoClient client = new MongoClient();
 
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "DEV")
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
-                client = new MongoClient(config.GetConnectionString("MoviesDbDev"));
-
-            }else if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "PROD")
-            {
-                client = new MongoClient(config.GetConnectionString("MoviesDbProd"));
+                client = new MongoClient(config.GetConnectionString("MoviesDb"));
             }
             else
             {
-                client = new MongoClient(config.GetConnectionString("MoviesDb"));
+                client = new MongoClient(config.GetConnectionString("MoviesDbProd"));
             }
             
             IMongoDatabase database = client.GetDatabase("MoviesDb");
