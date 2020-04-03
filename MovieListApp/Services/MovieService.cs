@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using MovieListApp.Models;
+using System;
 
 namespace MovieListApp.Services
 {
@@ -12,7 +13,21 @@ namespace MovieListApp.Services
 
         public MovieService(IConfiguration config)
         {
-            MongoClient client = new MongoClient(config.GetConnectionString("MoviesDbProd"));
+            MongoClient client = new MongoClient();
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "DEV")
+            {
+                client = new MongoClient(config.GetConnectionString("MoviesDbDev"));
+
+            }else if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "PROD")
+            {
+                client = new MongoClient(config.GetConnectionString("MoviesDbProd"));
+            }
+            else
+            {
+                client = new MongoClient(config.GetConnectionString("MoviesDb"));
+            }
+            
             IMongoDatabase database = client.GetDatabase("MoviesDb");
             movies = database.GetCollection<Movie>("Movies");
         }
