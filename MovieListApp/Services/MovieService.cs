@@ -12,7 +12,7 @@ namespace MovieListApp.Services
 
         public MovieService(IConfiguration config)
         {
-            MongoClient client = new MongoClient(config.GetConnectionString("MoviesDb"));
+            MongoClient client = new MongoClient(config.GetConnectionString("MoviesDbProd"));
             IMongoDatabase database = client.GetDatabase("MoviesDb");
             movies = database.GetCollection<Movie>("Movies");
         }
